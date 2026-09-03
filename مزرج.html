@@ -1,0 +1,2204 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#080b18">
+<title>مزرج | Mini App</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+  user-select:none;
+}
+
+html,body{
+  margin:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  font-family:Tahoma,Arial,sans-serif;
+  background:#080b18;
+  color:#fff;
+}
+
+body{
+  background:
+  radial-gradient(circle at 50% 20%,#30376e 0,#151b39 32%,#080b18 78%);
+}
+
+button,input{
+  font-family:inherit;
+}
+
+.app{
+  width:100%;
+  max-width:520px;
+  height:100dvh;
+  margin:auto;
+  position:relative;
+  overflow:hidden;
+}
+
+/* =========================
+BACKGROUND
+========================= */
+
+.particles{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
+
+.particle{
+  position:absolute;
+  width:4px;
+  height:4px;
+  border-radius:50%;
+  background:#ffd84d;
+  opacity:.35;
+  animation:particle 5s infinite ease-in-out;
+}
+
+@keyframes particle{
+  0%,100%{
+    transform:translateY(0) scale(1);
+    opacity:.15;
+  }
+  50%{
+    transform:translateY(-45px) scale(1.5);
+    opacity:.8;
+  }
+}
+
+/* =========================
+HEADER
+========================= */
+
+.header{
+  position:relative;
+  z-index:5;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:17px;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  font-weight:bold;
+}
+
+.logoIcon{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(145deg,#fff08b,#ffb000);
+  color:#704500;
+  font-weight:900;
+  box-shadow:0 0 25px #ffc40055;
+}
+
+.settings{
+  width:40px;
+  height:40px;
+  border:1px solid #ffffff14;
+  border-radius:14px;
+  background:#ffffff09;
+  color:#fff;
+  font-size:18px;
+}
+
+/* =========================
+HOME
+========================= */
+
+.scoreBox{
+  position:relative;
+  z-index:4;
+  text-align:center;
+}
+
+.scoreLabel{
+  color:#949cbd;
+  font-size:12px;
+}
+
+.score{
+  margin-top:5px;
+  font-size:43px;
+  font-weight:900;
+  text-shadow:0 0 25px #ffd43d35;
+}
+
+.coinName{
+  color:#ffd84d;
+  font-size:12px;
+}
+
+.levelBox{
+  position:relative;
+  z-index:4;
+  margin:13px 22px;
+  padding:10px 13px;
+  background:#ffffff08;
+  border:1px solid #ffffff0d;
+  border-radius:16px;
+}
+
+.levelTop{
+  display:flex;
+  justify-content:space-between;
+  font-size:11px;
+  color:#aeb5d4;
+  margin-bottom:7px;
+}
+
+.progress{
+  height:7px;
+  border-radius:20px;
+  overflow:hidden;
+  background:#ffffff0c;
+}
+
+.progressFill{
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,#ffae00,#ffe36b);
+  box-shadow:0 0 15px #ffd33d;
+}
+
+/* =========================
+TAP COIN
+========================= */
+
+.main{
+  height:calc(100dvh - 310px);
+  min-height:300px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  z-index:3;
+}
+
+.tapArea{
+  width:310px;
+  height:310px;
+  position:relative;
+  display:grid;
+  place-items:center;
+}
+
+.ring{
+  position:absolute;
+  width:305px;
+  height:305px;
+  border-radius:50%;
+  border:1px solid #ffd84d22;
+  box-shadow:0 0 45px #ffbd0022;
+  animation:ringPulse 2.5s infinite;
+}
+
+.ring2{
+  position:absolute;
+  width:273px;
+  height:273px;
+  border-radius:50%;
+  border:1px dashed #ffd84d2a;
+  animation:spin 18s linear infinite;
+}
+
+@keyframes ringPulse{
+  0%,100%{
+    transform:scale(.96);
+    opacity:.6;
+  }
+  50%{
+    transform:scale(1.03);
+    opacity:1;
+  }
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg)}
+}
+
+.coin{
+  width:225px;
+  height:225px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  position:relative;
+  background:
+  radial-gradient(circle at 35% 25%,
+  #fff7a6 0,
+  #ffe35a 13%,
+  #ffc21d 45%,
+  #e89500 75%,
+  #b96a00 100%);
+  border:7px solid #ffe879;
+  box-shadow:
+  0 0 0 8px #ffbd1720,
+  0 0 55px #ffbe0066,
+  inset 12px 12px 25px #fff7a044,
+  inset -18px -20px 25px #96500055;
+  transition:.08s;
+  touch-action:manipulation;
+}
+
+.coin:active{
+  transform:scale(.91) rotate(-2deg);
+}
+
+.coinText{
+  position:relative;
+  z-index:2;
+  color:#704500;
+  font-size:35px;
+  font-weight:900;
+  text-shadow:1px 2px #ffe99a;
+}
+
+.coinSub{
+  position:absolute;
+  bottom:48px;
+  color:#704500;
+  font-size:10px;
+  font-weight:bold;
+}
+
+.floatText{
+  position:absolute;
+  z-index:30;
+  color:#ffe36b;
+  font-size:25px;
+  font-weight:900;
+  pointer-events:none;
+  text-shadow:0 0 15px #ffad00;
+  animation:floatUp .8s forwards;
+}
+
+@keyframes floatUp{
+  from{
+    opacity:0;
+    transform:translate(-50%,0) scale(.6);
+  }
+  20%{opacity:1}
+  to{
+    opacity:0;
+    transform:translate(-50%,-100px) scale(1.15);
+  }
+}
+
+/* =========================
+ENERGY
+========================= */
+
+.energyBox{
+  position:relative;
+  z-index:5;
+  margin:0 22px 8px;
+}
+
+.energyTop{
+  display:flex;
+  justify-content:space-between;
+  color:#aeb5d4;
+  font-size:12px;
+  margin-bottom:7px;
+}
+
+.energyValue{
+  color:white;
+  font-weight:bold;
+}
+
+.energyBar{
+  height:9px;
+  border-radius:20px;
+  overflow:hidden;
+  background:#ffffff0d;
+}
+
+.energyFill{
+  height:100%;
+  width:100%;
+  background:linear-gradient(90deg,#36d9ff,#72f5ff);
+  box-shadow:0 0 15px #36dcff88;
+  transition:.15s;
+}
+
+/* =========================
+BOTTOM NAV
+========================= */
+
+.bottom{
+  position:absolute;
+  z-index:50;
+  bottom:0;
+  left:0;
+  right:0;
+  padding:9px 10px 15px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+  background:linear-gradient(to top,#080b18 60%,transparent);
+}
+
+.navBtn{
+  border:1px solid #ffffff0d;
+  border-radius:17px;
+  background:#ffffff08;
+  color:#aeb5d4;
+  padding:9px 2px;
+  font-size:10px;
+}
+
+.navBtn span{
+  display:block;
+  font-size:19px;
+  margin-bottom:3px;
+}
+
+.navBtn.active{
+  color:#ffd84d;
+  background:#ffd84d0c;
+  border-color:#ffd84d25;
+}
+
+/* =========================
+PAGES
+========================= */
+
+.page{
+  position:absolute;
+  inset:0;
+  z-index:40;
+  display:none;
+  padding:15px;
+  padding-bottom:90px;
+  overflow-y:auto;
+  background:
+  radial-gradient(circle at 50% 10%,#30376e,#141a36 40%,#080b18 90%);
+}
+
+.page.show{
+  display:block;
+}
+
+.pageHeader{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:15px;
+}
+
+.pageHeader h2{
+  margin:0;
+}
+
+.back{
+  width:40px;
+  height:40px;
+  border:0;
+  border-radius:13px;
+  background:#ffffff0d;
+  color:#fff;
+  font-size:20px;
+}
+
+/* =========================
+SHOP
+========================= */
+
+.shopIntro{
+  padding:15px;
+  border-radius:20px;
+  background:#ffffff08;
+  border:1px solid #ffffff0e;
+  margin-bottom:13px;
+}
+
+.shopIntroTitle{
+  font-weight:bold;
+  font-size:14px;
+}
+
+.shopIntroText{
+  margin-top:5px;
+  color:#9299bb;
+  font-size:10px;
+  line-height:1.8;
+}
+
+.wallet{
+  margin-top:10px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.wallet b{
+  color:#ffd84d;
+}
+
+/* CARD */
+
+.card{
+  position:relative;
+  overflow:hidden;
+  padding:12px;
+  margin-bottom:13px;
+  border-radius:23px;
+  background:
+  linear-gradient(145deg,#20294e,#11172e);
+  border:1px solid #ffffff10;
+  box-shadow:0 12px 35px #00000025;
+  transition:.2s;
+}
+
+.card:active{
+  transform:scale(.985);
+}
+
+.card::after{
+  content:"";
+  position:absolute;
+  width:130px;
+  height:130px;
+  border-radius:50%;
+  background:#ffd43d09;
+  right:-45px;
+  top:-50px;
+}
+
+.cardVisual{
+  height:125px;
+  border-radius:18px;
+  display:grid;
+  place-items:center;
+  position:relative;
+  overflow:hidden;
+  background:
+  radial-gradient(circle,#354579,#151b37 72%);
+}
+
+.cardVisual::before{
+  content:"";
+  position:absolute;
+  width:105px;
+  height:105px;
+  border-radius:50%;
+  background:#ffd43d16;
+  box-shadow:0 0 50px #ffd43d25;
+}
+
+.cardIcon{
+  position:relative;
+  z-index:2;
+  font-size:65px;
+  filter:drop-shadow(0 0 17px #ffd43d55);
+  animation:iconFloat 3s infinite ease-in-out;
+}
+
+@keyframes iconFloat{
+  0%,100%{
+    transform:translateY(0);
+  }
+  50%{
+    transform:translateY(-7px);
+  }
+}
+
+.cardTitle{
+  margin-top:12px;
+  font-weight:bold;
+  font-size:15px;
+}
+
+.cardDesc{
+  color:#9299bb;
+  font-size:10px;
+  line-height:1.8;
+  margin-top:5px;
+}
+
+.cardStats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+  margin-top:11px;
+}
+
+.cardStat{
+  padding:9px;
+  border-radius:12px;
+  background:#ffffff07;
+  color:#9ca5c8;
+  font-size:9px;
+}
+
+.cardStat b{
+  display:block;
+  color:#fff;
+  font-size:11px;
+  margin-top:4px;
+}
+
+.cardBottom{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:10px;
+  gap:7px;
+}
+
+.levelBadge{
+  color:#ffd84d;
+  font-size:10px;
+  font-weight:bold;
+}
+
+.buy{
+  border:0;
+  border-radius:13px;
+  padding:10px 14px;
+  background:linear-gradient(135deg,#ffe05b,#ffb300);
+  color:#533700;
+  font-weight:bold;
+  font-size:10px;
+}
+
+.buy:active{
+  transform:scale(.94);
+}
+
+.buy.max{
+  opacity:.5;
+}
+
+/* =========================
+FRIENDS
+========================= */
+
+.inviteCard{
+  background:linear-gradient(145deg,#292f67,#141a35);
+  border-radius:23px;
+  padding:23px 17px;
+  text-align:center;
+  border:1px solid #ffffff12;
+}
+
+.inviteIcon{
+  font-size:65px;
+}
+
+.inviteCard h2{
+  margin:8px 0;
+}
+
+.inviteCard p{
+  color:#9ca5c6;
+  font-size:11px;
+  line-height:2;
+}
+
+.linkBox{
+  display:flex;
+  gap:6px;
+  margin-top:15px;
+}
+
+.linkBox input{
+  min-width:0;
+  flex:1;
+  background:#080c1c;
+  border:1px solid #ffffff12;
+  border-radius:12px;
+  padding:11px;
+  color:#d9def1;
+  direction:ltr;
+  font-size:10px;
+}
+
+.copy{
+  border:0;
+  border-radius:12px;
+  background:#ffd43d;
+  color:#503500;
+  padding:0 13px;
+  font-weight:bold;
+}
+
+.reward{
+  margin-top:14px;
+  padding:12px;
+  background:#ffd43d0d;
+  border-radius:14px;
+  color:#ffe36b;
+  font-size:10px;
+}
+
+/* =========================
+STATS
+========================= */
+
+.statBox{
+  background:#ffffff08;
+  border:1px solid #ffffff0e;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.stat{
+  display:flex;
+  justify-content:space-between;
+  padding:15px;
+  border-bottom:1px solid #ffffff0a;
+  color:#9ca5c6;
+  font-size:12px;
+}
+
+.stat:last-child{
+  border-bottom:0;
+}
+
+.stat b{
+  color:#fff;
+}
+
+/* =========================
+TOAST
+========================= */
+
+.toast{
+  position:absolute;
+  z-index:100;
+  top:70px;
+  left:50%;
+  transform:translate(-50%,-20px);
+  opacity:0;
+  transition:.25s;
+  background:#202949;
+  border:1px solid #ffffff18;
+  border-radius:15px;
+  padding:10px 16px;
+  font-size:11px;
+  white-space:nowrap;
+  pointer-events:none;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translate(-50%,0);
+}
+
+/* =========================
+OFFLINE POPUP
+========================= */
+
+.offlinePopup{
+  position:absolute;
+  inset:0;
+  z-index:200;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:25px;
+  background:#050711cc;
+  backdrop-filter:blur(9px);
+}
+
+.offlinePopup.show{
+  display:flex;
+}
+
+.offlineBox{
+  width:100%;
+  border-radius:26px;
+  padding:24px;
+  text-align:center;
+  background:linear-gradient(145deg,#242c5b,#11172f);
+  border:1px solid #ffffff15;
+  box-shadow:0 20px 70px #0008;
+  animation:popup .3s ease;
+}
+
+@keyframes popup{
+  from{
+    transform:scale(.75);
+    opacity:0;
+  }
+  to{
+    transform:scale(1);
+    opacity:1;
+  }
+}
+
+.offlineBox .big{
+  font-size:70px;
+}
+
+.offlineBox h2{
+  margin:8px 0;
+}
+
+.offlineBox p{
+  color:#aeb5d4;
+  font-size:11px;
+  line-height:2;
+}
+
+.collectBtn{
+  width:100%;
+  border:0;
+  padding:14px;
+  border-radius:15px;
+  background:linear-gradient(135deg,#ffe05a,#ffb200);
+  color:#503500;
+  font-weight:bold;
+}
+
+/* small screens */
+
+@media(max-height:650px){
+
+  .main{
+    height:calc(100dvh - 285px);
+  }
+
+  .tapArea{
+    transform:scale(.78);
+  }
+
+  .score{
+    font-size:35px;
+  }
+
+  .levelBox{
+    margin:7px 22px;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<div class="particles" id="particles"></div>
+
+
+<!-- HOME -->
+
+<div id="homePage">
+
+  <div class="header">
+
+    <div class="logo">
+      <div class="logoIcon">M</div>
+      <span>مینی اپ مزرج</span>
+    </div>
+
+    <button class="settings" onclick="openStats()">
+      ⚙️
+    </button>
+
+  </div>
+
+
+  <div class="scoreBox">
+
+    <div class="scoreLabel">
+      موجودی شما
+    </div>
+
+    <div class="score" id="score">
+      0
+    </div>
+
+    <div class="coinName">
+      🪙 سکه مزرج
+    </div>
+
+  </div>
+
+
+  <div class="levelBox">
+
+    <div class="levelTop">
+
+      <span id="levelName">
+        سطح 1
+      </span>
+
+      <span id="levelProgress">
+        0 / 100
+      </span>
+
+    </div>
+
+    <div class="progress">
+      <div class="progressFill" id="levelFill"></div>
+    </div>
+
+  </div>
+
+
+  <div class="main">
+
+    <div class="tapArea" id="tapArea">
+
+      <div class="ring"></div>
+      <div class="ring2"></div>
+
+      <div class="coin" id="coin">
+
+        <div class="coinText">
+          مزرج
+        </div>
+
+        <div class="coinSub">
+          TAP TO EARN
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="energyBox">
+
+    <div class="energyTop">
+
+      <span>⚡ انرژی</span>
+
+      <span class="energyValue">
+        <span id="energy">1000</span>
+        /
+        <span id="maxEnergy">1000</span>
+      </span>
+
+    </div>
+
+    <div class="energyBar">
+      <div class="energyFill" id="energyFill"></div>
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- SHOP -->
+
+<div class="page" id="shopPage">
+
+  <div class="pageHeader">
+
+    <h2>🛒 فروشگاه</h2>
+
+    <button class="back" onclick="showHome()">
+      ×
+    </button>
+
+  </div>
+
+
+  <div class="shopIntro">
+
+    <div class="shopIntroTitle">
+      🏭 مرکز درآمد مزرج
+    </div>
+
+    <div class="shopIntroText">
+      کارت‌ها را با سکه خریداری و ارتقا بده.
+      هرچه سطح کارت بیشتر شود، درآمد آفلاین بیشتری در هر ساعت دریافت می‌کنی.
+    </div>
+
+    <div class="wallet">
+      <span>موجودی</span>
+      <b id="shopScore">0 🪙</b>
+    </div>
+
+  </div>
+
+
+  <!-- CARDS CONTAINER -->
+
+  <div id="cards"></div>
+
+</div>
+
+
+<!-- FRIENDS -->
+
+<div class="page" id="friendsPage">
+
+  <div class="pageHeader">
+
+    <h2>👥 دوستان</h2>
+
+    <button class="back" onclick="showHome()">
+      ×
+    </button>
+
+  </div>
+
+
+  <div class="inviteCard">
+
+    <div class="inviteIcon">
+      🎁
+    </div>
+
+    <h2>
+      دعوت دوستان
+    </h2>
+
+    <p>
+      لینک دعوت مخصوص خودت را برای دوستانت بفرست.
+      این نسخه برای تست، سیستم دعوت محلی دارد.
+    </p>
+
+    <div class="linkBox">
+
+      <input id="inviteLink" readonly>
+
+      <button class="copy" onclick="copyInvite()">
+        کپی
+      </button>
+
+    </div>
+
+    <div class="reward">
+      🎁 پاداش هر دعوت: 250 سکه
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- STATS -->
+
+<div class="page" id="statsPage">
+
+  <div class="pageHeader">
+
+    <h2>📊 آمار</h2>
+
+    <button class="back" onclick="showHome()">
+      ×
+    </button>
+
+  </div>
+
+
+  <div class="statBox">
+
+    <div class="stat">
+      <span>موجودی</span>
+      <b id="statScore">0</b>
+    </div>
+
+    <div class="stat">
+      <span>سطح</span>
+      <b id="statLevel">1</b>
+    </div>
+
+    <div class="stat">
+      <span>تعداد Tap</span>
+      <b id="statTaps">0</b>
+    </div>
+
+    <div class="stat">
+      <span>بیشترین Combo</span>
+      <b id="statCombo">0</b>
+    </div>
+
+    <div class="stat">
+      <span>درآمد ساعتی</span>
+      <b id="statIncome">0</b>
+    </div>
+
+    <div class="stat">
+      <span>کارت‌های خریداری‌شده</span>
+      <b id="statCards">0</b>
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- NAV -->
+
+<div class="bottom">
+
+  <button class="navBtn active" onclick="showHome()">
+    <span>🪙</span>
+    استخراج
+  </button>
+
+  <button class="navBtn" onclick="showShop()">
+    <span>🛒</span>
+    فروشگاه
+  </button>
+
+  <button class="navBtn" onclick="showFriends()">
+    <span>👥</span>
+    دوستان
+  </button>
+
+  <button class="navBtn" onclick="openStats()">
+    <span>🏆</span>
+    آمار
+  </button>
+
+</div>
+
+
+<!-- OFFLINE POPUP -->
+
+<div class="offlinePopup" id="offlinePopup">
+
+  <div class="offlineBox">
+
+    <div class="big">
+      🎁
+    </div>
+
+    <h2>
+      درآمد آفلاین!
+    </h2>
+
+    <p>
+      وقتی نبودی، کارت‌های مزرج برایت
+      <b id="offlineAmount">0</b>
+      سکه جمع کردند.
+    </p>
+
+    <button class="collectBtn" onclick="collectOfflineReward()">
+      دریافت سکه‌ها 🪙
+    </button>
+
+  </div>
+
+</div>
+
+
+<div class="toast" id="toast"></div>
+
+</div>
+
+
+<script>
+
+/* ==========================================
+DATA
+========================================== */
+
+const CARDS = [
+
+  {
+    id:"bank",
+    name:"بانک مزرج",
+    icon:"🏦",
+    desc:"یک بانک هوشمند که در زمان نبودنت برایت سکه تولید می‌کند.",
+    baseIncome:10,
+    basePrice:500,
+    priceGrowth:1.55
+  },
+
+  {
+    id:"mine",
+    name:"معدن سکه",
+    icon:"⛏️",
+    desc:"معدن زیرزمینی مزرج که با هر ارتقا، استخراج سکه بیشتر می‌شود.",
+    baseIncome:20,
+    basePrice:1200,
+    priceGrowth:1.60
+  },
+
+  {
+    id:"energy",
+    name:"مرکز انرژی",
+    icon:"⚡",
+    desc:"مرکز انرژی پیشرفته برای تولید درآمد بیشتر در پس‌زمینه.",
+    baseIncome:35,
+    basePrice:2500,
+    priceGrowth:1.65
+  },
+
+  {
+    id:"robot",
+    name:"ربات جمع‌آور",
+    icon:"🤖",
+    desc:"ربات هوشمند مزرج که حتی وقتی بازی بسته است، کار می‌کند.",
+    baseIncome:55,
+    basePrice:5000,
+    priceGrowth:1.70
+  },
+
+  {
+    id:"factory",
+    name:"کارخانه مزرج",
+    icon:"🏭",
+    desc:"کارخانه بزرگ و خودکار که درآمد ساعتی زیادی تولید می‌کند.",
+    baseIncome:90,
+    basePrice:10000,
+    priceGrowth:1.75
+  },
+
+  {
+    id:"space",
+    name:"مرکز فضایی",
+    icon:"🚀",
+    desc:"پیشرفته‌ترین کارت مزرج با فناوری آینده و درآمد فوق‌العاده.",
+    baseIncome:160,
+    basePrice:25000,
+    priceGrowth:1.80
+  }
+
+];
+
+
+/* ==========================================
+PLAYER DATA
+========================================== */
+
+let score =
+  Number(localStorage.getItem("mazraj_score")) || 0;
+
+let energy =
+  Number(localStorage.getItem("mazraj_energy"));
+
+let maxEnergy =
+  Number(localStorage.getItem("mazraj_max_energy"))
+  || 1000;
+
+if(!Number.isFinite(energy)){
+  energy=maxEnergy;
+}
+
+let taps =
+  Number(localStorage.getItem("mazraj_taps")) || 0;
+
+let bestCombo =
+  Number(localStorage.getItem("mazraj_best_combo")) || 0;
+
+let lastSeen =
+  Number(localStorage.getItem("mazraj_last_seen"))
+  || Date.now();
+
+let pendingOffline =
+  Number(localStorage.getItem("mazraj_pending_offline"))
+  || 0;
+
+let combo=0;
+let lastTap=0;
+
+
+/* ==========================================
+CARD LEVELS
+========================================== */
+
+let cardLevels =
+  JSON.parse(
+    localStorage.getItem("mazraj_cards") || "{}"
+  );
+
+
+/* ==========================================
+ELEMENTS
+========================================== */
+
+const scoreEl=
+  document.getElementById("score");
+
+const energyEl=
+  document.getElementById("energy");
+
+const maxEnergyEl=
+  document.getElementById("maxEnergy");
+
+const energyFill=
+  document.getElementById("energyFill");
+
+const levelName=
+  document.getElementById("levelName");
+
+const levelProgress=
+  document.getElementById("levelProgress");
+
+const levelFill=
+  document.getElementById("levelFill");
+
+const coin=
+  document.getElementById("coin");
+
+const tapArea=
+  document.getElementById("tapArea");
+
+
+/* ==========================================
+CARD FUNCTIONS
+========================================== */
+
+function getCardLevel(id){
+
+  return Number(cardLevels[id]) || 0;
+
+}
+
+
+function getCardIncome(card){
+
+  const level=
+    getCardLevel(card.id);
+
+  if(level<=0){
+    return 0;
+  }
+
+  return card.baseIncome * level;
+
+}
+
+
+function getCardPrice(card){
+
+  const level=
+    getCardLevel(card.id);
+
+  return Math.floor(
+    card.basePrice *
+    Math.pow(card.priceGrowth,level)
+  );
+
+}
+
+
+function getTotalHourlyIncome(){
+
+  let total=0;
+
+  CARDS.forEach(card=>{
+    total += getCardIncome(card);
+  });
+
+  return total;
+
+}
+
+
+function getOwnedCards(){
+
+  return CARDS.filter(
+    c=>getCardLevel(c.id)>0
+  ).length;
+
+}
+
+
+/* ==========================================
+RENDER SHOP
+========================================== */
+
+function renderShop(){
+
+  const container=
+    document.getElementById("cards");
+
+  container.innerHTML="";
+
+  CARDS.forEach(card=>{
+
+    const level=
+      getCardLevel(card.id);
+
+    const income=
+      getCardIncome(card);
+
+    const price=
+      getCardPrice(card);
+
+    const nextIncome=
+      card.baseIncome*(level+1);
+
+    const cardEl=
+      document.createElement("div");
+
+    cardEl.className="card";
+
+    cardEl.innerHTML=`
+
+      <div class="cardVisual">
+        <div class="cardIcon">
+          ${card.icon}
+        </div>
+      </div>
+
+      <div class="cardTitle">
+        ${card.name}
+      </div>
+
+      <div class="cardDesc">
+        ${card.desc}
+      </div>
+
+      <div class="cardStats">
+
+        <div class="cardStat">
+          سطح
+          <b>
+            ${level}
+          </b>
+        </div>
+
+        <div class="cardStat">
+          درآمد فعلی
+          <b>
+            ${income.toLocaleString("fa-IR")} 🪙/ساعت
+          </b>
+        </div>
+
+        <div class="cardStat">
+          درآمد بعدی
+          <b>
+            ${nextIncome.toLocaleString("fa-IR")} 🪙/ساعت
+          </b>
+        </div>
+
+        <div class="cardStat">
+          قیمت ارتقا
+          <b>
+            ${price.toLocaleString("fa-IR")} 🪙
+          </b>
+        </div>
+
+      </div>
+
+      <div class="cardBottom">
+
+        <div class="levelBadge">
+          ${level===0 ? "🔒 قفل" : "⭐ سطح "+level}
+        </div>
+
+        <button
+          class="buy"
+          onclick="upgradeCard('${card.id}')">
+
+          ${level===0
+            ? "خرید 🪙 "+price.toLocaleString("fa-IR")
+            : "ارتقا 🪙 "+price.toLocaleString("fa-IR")}
+
+        </button>
+
+      </div>
+    `;
+
+    container.appendChild(cardEl);
+
+  });
+
+}
+
+
+/* ==========================================
+UPGRADE CARD
+========================================== */
+
+function upgradeCard(id){
+
+  const card=
+    CARDS.find(c=>c.id===id);
+
+  if(!card)return;
+
+  const price=
+    getCardPrice(card);
+
+  if(score<price){
+
+    showToast(
+      "🪙 سکه کافی نداری"
+    );
+
+    return;
+
+  }
+
+  score-=price;
+
+  cardLevels[id]=
+    getCardLevel(id)+1;
+
+  save();
+
+  updateUI();
+
+  renderShop();
+
+  showToast(
+    "🎉 "+card.name+
+    " به سطح "+
+    getCardLevel(id)+
+    " رسید!"
+  );
+
+}
+
+
+/* ==========================================
+OFFLINE
+========================================== */
+
+function calculateOffline(){
+
+  const hourly=
+    getTotalHourlyIncome();
+
+  if(hourly<=0){
+    return 0;
+  }
+
+  const now=Date.now();
+
+  const elapsed=
+    Math.max(0,now-lastSeen);
+
+  const hours=
+    elapsed/3600000;
+
+  const limited=
+    Math.min(24,hours);
+
+  return Math.floor(
+    limited*hourly
+  );
+
+}
+
+
+function prepareOffline(){
+
+  const income=
+    calculateOffline();
+
+  if(income>0){
+
+    pendingOffline += income;
+
+    localStorage.setItem(
+      "mazraj_pending_offline",
+      pendingOffline
+    );
+
+    document.getElementById(
+      "offlineAmount"
+    ).textContent=
+      pendingOffline.toLocaleString("fa-IR");
+
+    document.getElementById(
+      "offlinePopup"
+    ).classList.add("show");
+
+  }
+
+}
+
+
+function collectOfflineReward(){
+
+  if(pendingOffline<=0){
+
+    closeOffline();
+
+    return;
+
+  }
+
+  score += pendingOffline;
+
+  pendingOffline=0;
+
+  localStorage.setItem(
+    "mazraj_pending_offline",
+    "0"
+  );
+
+  closeOffline();
+
+  updateUI();
+
+  save();
+
+  showToast(
+    "🎉 درآمد آفلاین به موجودی اضافه شد!"
+  );
+
+}
+
+
+function closeOffline(){
+
+  document.getElementById(
+    "offlinePopup"
+  ).classList.remove("show");
+
+}
+
+
+/* ==========================================
+LEVEL
+========================================== */
+
+function getLevel(){
+
+  return {
+    level:Math.floor(score/100)+1,
+    current:score%100
+  };
+
+}
+
+
+/* ==========================================
+UPDATE UI
+========================================== */
+
+function updateUI(){
+
+  scoreEl.textContent=
+    score.toLocaleString("fa-IR");
+
+  energyEl.textContent=
+    Math.floor(energy).toLocaleString("fa-IR");
+
+  maxEnergyEl.textContent=
+    maxEnergy.toLocaleString("fa-IR");
+
+  energyFill.style.width=
+    Math.max(
+      0,
+      Math.min(100,(energy/maxEnergy)*100)
+    )+"%";
+
+  const lvl=getLevel();
+
+  levelName.textContent=
+    "سطح "+lvl.level.toLocaleString("fa-IR");
+
+  levelProgress.textContent=
+    lvl.current.toLocaleString("fa-IR")
+    +" / 100";
+
+  levelFill.style.width=
+    lvl.current+"%";
+
+
+  document.getElementById("shopScore")
+    .textContent=
+    score.toLocaleString("fa-IR")
+    +" 🪙";
+
+
+  document.getElementById("statScore")
+    .textContent=
+    score.toLocaleString("fa-IR");
+
+  document.getElementById("statLevel")
+    .textContent=
+    lvl.level.toLocaleString("fa-IR");
+
+  document.getElementById("statTaps")
+    .textContent=
+    taps.toLocaleString("fa-IR");
+
+  document.getElementById("statCombo")
+    .textContent=
+    bestCombo.toLocaleString("fa-IR");
+
+  document.getElementById("statIncome")
+    .textContent=
+    getTotalHourlyIncome()
+    .toLocaleString("fa-IR")
+    +" 🪙/ساعت";
+
+  document.getElementById("statCards")
+    .textContent=
+    getOwnedCards()
+    .toLocaleString("fa-IR");
+
+}
+
+
+/* ==========================================
+SAVE
+========================================== */
+
+function save(){
+
+  localStorage.setItem(
+    "mazraj_score",
+    score
+  );
+
+  localStorage.setItem(
+    "mazraj_energy",
+    energy
+  );
+
+  localStorage.setItem(
+    "mazraj_max_energy",
+    maxEnergy
+  );
+
+  localStorage.setItem(
+    "mazraj_taps",
+    taps
+  );
+
+  localStorage.setItem(
+    "mazraj_best_combo",
+    bestCombo
+  );
+
+  localStorage.setItem(
+    "mazraj_cards",
+    JSON.stringify(cardLevels)
+  );
+
+  localStorage.setItem(
+    "mazraj_last_seen",
+    Date.now()
+  );
+
+}
+
+
+/* ==========================================
+TAP
+========================================== */
+
+function doTap(e){
+
+  if(energy<1){
+
+    showToast(
+      "⚡ انرژی تمام شده"
+    );
+
+    return;
+
+  }
+
+  const now=Date.now();
+
+  if(now-lastTap<900){
+    combo++;
+  }else{
+    combo=1;
+  }
+
+  lastTap=now;
+
+  bestCombo=
+    Math.max(bestCombo,combo);
+
+  const multiplier=
+    Math.min(
+      5,
+      1+Math.floor(combo/10)
+    );
+
+  score+=multiplier;
+
+  energy-=1;
+
+  taps++;
+
+  coin.classList.add("tap");
+
+  setTimeout(()=>{
+    coin.classList.remove("tap");
+  },80);
+
+  createFloatText(
+    "+"+multiplier,
+    e
+  );
+
+  updateUI();
+  save();
+
+}
+
+
+/* ==========================================
+FLOATING TEXT
+========================================== */
+
+function createFloatText(text,e){
+
+  const el=
+    document.createElement("div");
+
+  el.className="floatText";
+
+  el.textContent=text;
+
+  const rect=
+    tapArea.getBoundingClientRect();
+
+  let x=
+    rect.width/2;
+
+  let y=
+    rect.height/2;
+
+  if(e){
+
+    x=e.clientX-rect.left;
+    y=e.clientY-rect.top;
+
+  }
+
+  el.style.left=x+"px";
+  el.style.top=y+"px";
+
+  tapArea.appendChild(el);
+
+  setTimeout(()=>{
+    el.remove();
+  },800);
+
+}
+
+
+/* ==========================================
+ENERGY REGEN
+========================================== */
+
+setInterval(()=>{
+
+  if(energy<maxEnergy){
+
+    energy+=2;
+
+    if(energy>maxEnergy){
+      energy=maxEnergy;
+    }
+
+    updateUI();
+    save();
+
+  }
+
+},1000);
+
+
+/* ==========================================
+ENERGY SHOP
+========================================== */
+
+/*
+هر بار با کلیک روی دکمه
+انرژی 250 واحد افزایش پیدا می‌کند.
+برای استفاده از آن، دکمه مخفی نیست:
+داخل فروشگاه کارت انرژی وجود دارد.
+*/
+
+function buyEnergy(){
+
+  const price=
+    750+
+    Math.floor((maxEnergy-1000)/250)*250;
+
+  if(score<price){
+
+    showToast(
+      "🪙 سکه کافی نداری"
+    );
+
+    return;
+
+  }
+
+  score-=price;
+
+  maxEnergy+=250;
+
+  energy=maxEnergy;
+
+  save();
+
+  updateUI();
+
+  showToast(
+    "⚡ ظرفیت انرژی افزایش یافت"
+  );
+
+}
+
+
+/* ==========================================
+ADD ENERGY CARD
+========================================== */
+
+function addEnergyCard(){
+
+  const container=
+    document.getElementById("cards");
+
+  const card=
+    document.createElement("div");
+
+  card.className="card";
+
+  const price=
+    750+
+    Math.floor((maxEnergy-1000)/250)*250;
+
+  card.innerHTML=`
+
+    <div class="cardVisual">
+      <div class="cardIcon">🔋</div>
+    </div>
+
+    <div class="cardTitle">
+      باتری انرژی
+    </div>
+
+    <div class="cardDesc">
+      ظرفیت انرژی خودت را افزایش بده تا بتوانی
+      Tap بیشتری انجام بدهی.
+    </div>
+
+    <div class="cardStats">
+
+      <div class="cardStat">
+        ظرفیت فعلی
+        <b>${maxEnergy.toLocaleString("fa-IR")}</b>
+      </div>
+
+      <div class="cardStat">
+        افزایش
+        <b>+250 ⚡</b>
+      </div>
+
+    </div>
+
+    <div class="cardBottom">
+
+      <div class="levelBadge">
+        ⚡ انرژی بیشتر
+      </div>
+
+      <button class="buy"
+        onclick="buyEnergy()">
+
+        🪙 ${price.toLocaleString("fa-IR")}
+
+      </button>
+
+    </div>
+
+  `;
+
+  container.appendChild(card);
+
+}
+
+
+/* ==========================================
+SHOW SHOP
+========================================== */
+
+function showShop(){
+
+  document.getElementById(
+    "homePage"
+  ).style.display="none";
+
+  document.getElementById(
+    "friendsPage"
+  ).classList.remove("show");
+
+  document.getElementById(
+    "statsPage"
+  ).classList.remove("show");
+
+  document.getElementById(
+    "shopPage"
+  ).classList.add("show");
+
+  renderShop();
+
+  addEnergyCard();
+
+  updateUI();
+
+}
+
+
+/* ==========================================
+SHOW HOME
+========================================== */
+
+function showHome(){
+
+  document.getElementById(
+    "homePage"
+  ).style.display="block";
+
+  document.getElementById(
+    "shopPage"
+  ).classList.remove("show");
+
+  document.getElementById(
+    "friendsPage"
+  ).classList.remove("show");
+
+  document.getElementById(
+    "statsPage"
+  ).classList.remove("show");
+
+}
+
+
+/* ==========================================
+FRIENDS
+========================================== */
+
+function showFriends(){
+
+  document.getElementById(
+    "homePage"
+  ).style.display="none";
+
+  document.getElementById(
+    "shopPage"
+  ).classList.remove("show");
+
+  document.getElementById(
+    "statsPage"
+  ).classList.remove("show");
+
+  document.getElementById(
+    "friendsPage"
+  ).classList.add("show");
+
+}
+
+
+let userId=
+  localStorage.getItem(
+    "mazraj_user_id"
+  );
+
+if(!userId){
+
+  userId=
+    Math.floor(
+      100000+
+      Math.random()*900000
+    );
+
+  localStorage.setItem(
+    "mazraj_user_id",
+    userId
+  );
+
+}
+
+document.getElementById(
+  "inviteLink"
+).value=
+  location.origin+
+  location.pathname+
+  "?ref="+
+  userId;
+
+
+/* ==========================================
+COPY INVITE
+========================================== */
+
+function copyInvite(){
+
+  const input=
+    document.getElementById(
+      "inviteLink"
+    );
+
+  if(navigator.clipboard){
+
+    navigator.clipboard.writeText(
+      input.value
+    );
+
+  }else{
+
+    input.select();
+
+    document.execCommand(
+      "copy"
+    );
+
+  }
+
+  showToast(
+    "🔗 لینک دعوت کپی شد"
+  );
+
+}
+
+
+/* ==========================================
+STATS
+========================================== */
+
+function openStats(){
+
+  document.getElementById(
+    "homePage"
+  ).style.display="none";
+
+  document.getElementById(
+    "shopPage"
+  ).classList.remove("show");
+
+  document.getElementById(
+    "friendsPage"
+  ).classList.remove("show");
+
+  document.getElementById(
+    "statsPage"
+  ).classList.add("show");
+
+  updateUI();
+
+}
+
+
+/* ==========================================
+TOAST
+========================================== */
+
+function showToast(text){
+
+  const toast=
+    document.getElementById(
+      "toast"
+    );
+
+  toast.textContent=text;
+
+  toast.classList.add("show");
+
+  clearTimeout(
+    window.toastTimer
+  );
+
+  window.toastTimer=
+    setTimeout(()=>{
+      toast.classList.remove("show");
+    },2000);
+
+}
+
+
+/* ==========================================
+PARTICLES
+========================================== */
+
+function createParticles(){
+
+  const box=
+    document.getElementById(
+      "particles"
+    );
+
+  for(let i=0;i<30;i++){
+
+    const p=
+      document.createElement("div");
+
+    p.className="particle";
+
+    p.style.left=
+      Math.random()*100+"%";
+
+    p.style.top=
+      Math.random()*100+"%";
+
+    p.style.animationDelay=
+      Math.random()*5+"s";
+
+    p.style.animationDuration=
+      (3+Math.random()*5)+"s";
+
+    box.appendChild(p);
+
+  }
+
+}
+
+
+/* ==========================================
+TAP EVENT
+========================================== */
+
+coin.addEventListener(
+  "pointerdown",
+  function(e){
+
+    e.preventDefault();
+
+    doTap(e);
+
+  }
+);
+
+document.addEventListener(
+  "contextmenu",
+  e=>e.preventDefault()
+);
+
+
+/* ==========================================
+APP START
+========================================== */
+
+createParticles();
+
+/*
+قبل از ذخیره lastSeen،
+درآمد زمان قبلی محاسبه می‌شود.
+*/
+
+prepareOffline();
+
+lastSeen=Date.now();
+
+updateUI();
+
+save();
+
+</script>
+
+</body>
+</html>
